@@ -1,0 +1,75 @@
+----vvvvvvvvvvvvvvvvvvvv NOTES POUR RAILS vvvvvvvvvvvvvvvvvvvv----
+
+---- MVC ---
+
+Models : Ressouces (user, post, article, stock)
+Views : Front-End (html, css, js, photo, ...) --> dossier.html.erb
+Controllers : Back-End (logique, routes, requete) --> users_controller
+
+---- GIT ----
+git init --> Initialize un fichier pour git
+git add -A --> ajoute les fichier pour les saves
+git commit -m "Mon message" --> Envoie les fichier 
+git status --> check le status des fichier
+git remote add origin https://github.com/Bapsk/test_app_1.git --> selectionne le fichier en ligne
+git branch -M main --> selectionne la branche
+git push -u origin main --> envoie le tout
+
+---- DEPLOY PROD ----
+--------------------------------------------------
+group :development, :test do
+  gem 'sqlite3', '~> 1.4'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+--------------------------------------------------
+Create a group production ->
+
+group :production do
+  gem 'pg'
+end
+--------------------------------------------------
+
+bundle install --without production
+git add -A
+git commit -m "Make app production ready"
+heroku --version --> check if heroku available
+heroku login
+heroku create --> in the file project
+git push heroku master
+heroku rename newnameofyourapp
+
+---- GENERATE ARTICLES AUTO ----
+rails generate scaffold Article title:string description:text --> genere les dossiser requis pour les articles
+rails routes --expanded --> montre les routes en details
+
+---- GENERATE TABLE ---
+rails generate migration create_articles
+t.string :title
+rails db:migrate
+
+---- MODIFIE TABLE ----
+rails generate migration name_of_migration_file
+add_column :nom_table, :nom_colonne, :type
+add_column :articles, :updated_at, :datetime
+rails db:migrate
+
+---- RAILS CONSOLE ----
+rails console --> active la console
+Article.all --> Le nom de la classe suivis de all montre la table complete
+Article.create(title: "first article", description: "Description of first article") # make sure Article is capitalized if using this method
+article = Article.new
+article.title = "second article"
+article.description = "description of second article"
+article.save
+article = Article.new(title: "third article", description: "description of third article")
+article.save
+
+Article.find(1) --> find article with id
+Article.first # display the first article in the articles table
+Article.last # display the last article in the articles table
+article.destroy --> supprime un article
+
+---- MSG ERREUR ----
+FLASH
+
+
